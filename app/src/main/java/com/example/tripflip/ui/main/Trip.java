@@ -30,7 +30,7 @@ public class Trip {
 
     public String getDateString() {
         SimpleDateFormat format =new SimpleDateFormat("MMM dd, yyyy", Locale.US);
-        String date = format.format(startDate) + "\n - \n" + format.format(endDate);
+        String date = format.format(startDate) + " - " + format.format(endDate);
         return date;
     }
 }

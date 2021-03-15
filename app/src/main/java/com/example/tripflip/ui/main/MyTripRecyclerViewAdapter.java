@@ -25,8 +25,8 @@ public class MyTripRecyclerViewAdapter extends RecyclerView.Adapter<MyTripRecycl
 
     private final List<Trip> tripList;
 
-    public MyTripRecyclerViewAdapter() {
-        tripList = getTrips();
+    public MyTripRecyclerViewAdapter(List<Trip> trips) {
+        tripList = trips;
     }
 
     @NonNull

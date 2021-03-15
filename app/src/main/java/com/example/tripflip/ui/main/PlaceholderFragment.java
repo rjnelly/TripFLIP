@@ -7,8 +7,6 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,7 +18,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tripflip.R;
-import com.example.tripflip.ui.MineButton;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -62,40 +59,9 @@ public class PlaceholderFragment extends Fragment {
                 textView.setText(s);
             }
         });
-        LinearLayout layout = root.findViewById(R.id.layout);
-
-        for(int i = 0; i < 5; i++){
-            LinearLayout rowLayout = new LinearLayout(getContext());
-            rowLayout.setOrientation(LinearLayout.HORIZONTAL);
-            for(int j = 0; j < 5; j++){
-                final int row = i;
-                final int col = j;
-                AppCompatButton button = new AppCompatButton(root.getContext());
-                button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                    }
-                });
-                int width = Math.round(convertDpToPixel(50,root.getContext()));
-                int height = Math.round(convertDpToPixel(50,root.getContext()));
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, height);
-                params.weight = 0.0f;
 
 
-                button.setLayoutParams(params);
-                rowLayout.addView(button);
-
-
-            }
-            layout.addView(rowLayout);
-        }
         return root;
     }
-    public static float convertDpToPixel(float dp, Context context){
-        Resources resources = context.getResources();
-        DisplayMetrics metrics = resources.getDisplayMetrics();
-        float px = dp * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
-        return px;
-    }
+
 }

@@ -30,21 +30,25 @@ public class TripFragment extends Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
+    private List<Trip>  trips;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public TripFragment() {
+    public TripFragment(List<Trip> trips) {
+        this.trips = trips;
+
     }
 
 
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static TripFragment newInstance(int columnCount) {
-        TripFragment fragment = new TripFragment();
+    public static TripFragment newInstance(int columnCount, List<Trip> trips) {
+        TripFragment fragment = new TripFragment(trips);
         Bundle args = new Bundle();
+
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
         return fragment;
@@ -62,7 +66,7 @@ public class TripFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_trip_list_item, container, false);
+        View view = inflater.inflate(R.layout.fragment_trip_list, container, false);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -73,7 +77,7 @@ public class TripFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyTripRecyclerViewAdapter());
+            recyclerView.setAdapter(new MyTripRecyclerViewAdapter(trips));
         }
         return view;
     }

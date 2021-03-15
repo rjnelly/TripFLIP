@@ -2,6 +2,7 @@ package com.example.tripflip;
 
 import android.os.Bundle;
 
+import com.example.tripflip.ui.main.Trip;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
@@ -17,8 +18,10 @@ import android.widget.GridLayout;
 
 import com.example.tripflip.ui.main.SectionsPagerAdapter;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
-    Button[][] squares = new Button[5][5];
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
