@@ -4,4 +4,5 @@
     <string name="tab_text_2">Tab 2</string>
     <string name="upcoming">Upcoming Trips</string>
     <string name="past">Past Trips</string>
+    <string name="preference_key_trips">pref_key_trips</string>
 </resources>

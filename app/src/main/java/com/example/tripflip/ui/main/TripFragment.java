@@ -1,6 +1,7 @@
 package com.example.tripflip.ui.main;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,7 +16,10 @@ import android.view.ViewGroup;
 
 import com.example.tripflip.R;
 import com.example.tripflip.ui.main.dummy.DummyContent;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -28,27 +32,27 @@ public class TripFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
+    private static final String SHARED_PREFERENCES_KEY = "shared_preferences";
     // TODO: Customize parameters
     private int mColumnCount = 1;
-    private List<Trip>  trips;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public TripFragment(List<Trip> trips) {
-        this.trips = trips;
+    public TripFragment() {
+
 
     }
+
 
 
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
     public static TripFragment newInstance(int columnCount, List<Trip> trips) {
-        TripFragment fragment = new TripFragment(trips);
+        TripFragment fragment = new TripFragment();
         Bundle args = new Bundle();
-
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
         return fragment;
@@ -77,8 +81,19 @@ public class TripFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyTripRecyclerViewAdapter(trips));
+            recyclerView.setAdapter(new MyTripRecyclerViewAdapter(getTripsFromPreferences()));
         }
         return view;
+    }
+
+    private  List<Trip> getTripsFromPreferences() {
+        List<Trip> trips;
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE);
+        String eventListJson = sharedPreferences.getString(getResources().getString(R.string.preference_key_trips), null);
+        Type type = new TypeToken<ArrayList<Trip>>() {}.getType();
+        Gson gson = new Gson();
+        trips = gson.fromJson(eventListJson, type);
+        if(trips == null) trips = new ArrayList<Trip>();
+        return trips;
     }
 }

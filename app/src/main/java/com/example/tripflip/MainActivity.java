@@ -1,5 +1,6 @@
 package com.example.tripflip;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.tripflip.ui.main.Trip;
@@ -7,6 +8,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
+import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,6 +24,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int NEW_TRIP_ACTIVITY_REQUEST_CODE = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,14 +40,19 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(MainActivity.this, NewTripActivity.class);
+                startActivityForResult(intent, NEW_TRIP_ACTIVITY_REQUEST_CODE);
             }
         });
 
     }
 
-    private void clickMethod(View v, int row, int col) {
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == NEW_TRIP_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK){
+            //get Trip from data
+            //add trip to sharedPreferences
+        }
     }
 }

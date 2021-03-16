@@ -3,6 +3,8 @@ package com.example.tripflip.ui.main;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +13,10 @@ import android.widget.Toast;
 
 import com.example.tripflip.R;
 import com.example.tripflip.ui.main.dummy.DummyContent.DummyItem;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -23,11 +28,13 @@ import java.util.List;
  */
 public class MyTripRecyclerViewAdapter extends RecyclerView.Adapter<MyTripRecyclerViewAdapter.ViewHolder> {
 
-    private final List<Trip> tripList;
+    private List<Trip> tripList;
 
     public MyTripRecyclerViewAdapter(List<Trip> trips) {
         tripList = trips;
     }
+
+
 
     @NonNull
     private List<Trip> getTrips() {
